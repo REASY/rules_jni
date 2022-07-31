@@ -29,15 +29,15 @@ def _single_platform_artifact_impl(ctx):
             [file.short_path for file in files],
         ))
     default_runfiles = info.default_runfiles.files.to_list()
-#     if len(default_runfiles) != 1:
-#         fail("Expected no default runfiles on artifact other than the artifact itself, got:\n    " + "\n    ".join(
-#             [runfile.short_path for runfile in default_runfiles if runfile != files[0]],
-#         ))
-#     data_runfiles = info.data_runfiles.files.to_list()
-#     if len(data_runfiles) != 1:
-#         fail("Expected no data runfiles on artifact other than the artifact itself, got:\n    " + "\n    ".join(
-#             [runfile.short_path for runfile in data_runfiles if runfile != files[0]],
-#         ))
+    if len(default_runfiles) != 1:
+        print("Expected no default runfiles on artifact other than the artifact itself, got:\n    " + "\n    ".join(
+            [runfile.short_path for runfile in default_runfiles if runfile != files[0]],
+        ))
+    data_runfiles = info.data_runfiles.files.to_list()
+    if len(data_runfiles) != 1:
+        print("Expected no data runfiles on artifact other than the artifact itself, got:\n    " + "\n    ".join(
+            [runfile.short_path for runfile in data_runfiles if runfile != files[0]],
+        ))
     return [
         SinglePlatformArtifactInfo(
             cpu = ctx.attr.cpu,
